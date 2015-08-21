@@ -17,5 +17,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yyonggithub",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/choice-form/letvCloud.git"
+  },
+  "keywords": [
+    "letvcloud"
+  ],
+  "bugs": {
+    "url": "https://github.com/choice-form/letvCloud/issues"
+  },
+  "homepage": "https://github.com/choice-form/letvCloud#readme"
 }
