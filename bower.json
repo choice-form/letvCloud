@@ -1,0 +1,25 @@
+{
+  "name": "letvcloud",
+  "version": "0.0.1",
+  "description": "letvcloud-csvfx",
+  "moduleType": [
+    "globals"
+  ],
+  "authors": [
+    "yyonggithub"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "blueimp-md5": "~1.1.1",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}

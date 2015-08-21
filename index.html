@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>letv</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>乐视云</h1>
+			<div class="col-md-12">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<h3>视频列表</h3>
+						</tr>
+						<tr>
+							<th>#</th>
+							<th>video_id</th>
+							<th>video_name</th>
+							<th>add_time</th>
+							<th>complete_time</th>
+							<th>file_md5</th>
+							<th>img</th>
+							<th>initial_size</th>
+							<th>is_pay</th>
+							<th>mid</th>
+							<th>status</th>
+							<!--<th>tag</th>-->
+							<!--<th>video_desc</th>-->
+							<th>video_duration</th>
+							<th>video_unique</th>
+						</tr>
+					</thead>
+					<tbody id="content">
+						<script id="test" type="text/html">
+							{{each list as value i}}
+							<tr>
+								<th scope="row">{{i+1}}</th>
+								<td>{{value.video_id}}</td>
+								<td>{{value.video_name}}</td>
+								<td>{{value.add_time}}</td>
+								<td>{{value.complete_time}}</td>
+								<td>{{value.file_md5}}</td>
+								<td>{{value.img}}</td>
+								<td>{{value.initial_size}}</td>
+								<td>{{value.is_pay}}</td>
+								<td>{{value.mid}}</td>
+								<td>{{value.status}}</td>
+								<!--<td>{{value.tag}}</td>-->
+								<!--<td>{{value.video_desc}}</td>-->
+								<td>{{value.video_duration}}</td>
+								<td>{{value.video_unique}}</td>
+							</tr>
+							{{/each}}
+						</script>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row col-md-6">
+			<form action="">
+				<div class="form-group">
+					<label for="fileinput">选择视频文件</label>
+					<input type="file" id="fileinput">
+					<p class="help-block">选择您需要上传的视频文件</p>
+				</div>
+				<button class="btn btn-default" type="submit">提交</button>
+			</form>
+		</div>
+	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/blueimp-md5/js/md5.min.js"></script>
+	<script src="node_modules/art-template/dist/template.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>

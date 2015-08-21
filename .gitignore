@@ -1,0 +1,16 @@
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# mac
+.DS_Store 
+
+# My configurations:
+logs/* 
+node_modules/
+bower_components/
+typings/
+.svn/
+.idea/
+tmp

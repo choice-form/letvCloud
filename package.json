@@ -1,0 +1,21 @@
+{
+  "name": "letvcloud",
+  "version": "0.0.1",
+  "description": "letvcloud-csvfx",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "art-template": "^3.0.3",
+    "http-server": "^0.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "preinstall": "npm install art-template http-server",
+    "postinstall": "bower install",
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yyonggithub",
+  "license": "ISC"
+}
