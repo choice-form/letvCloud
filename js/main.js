@@ -132,15 +132,6 @@ var videoGet = {
 	timestamp: timestamp
 }
 
-// 视频上传初始化
-var init = {
-	api: "video.upload.init",
-	video_name: "Daum Potplayer-64 Bits.mp4",
-	client_ip: "101.224.122.70",
-	file_size: "123123",
-	uploadtype: "0", //是否分片上传，0不分片，1分片；默认0
-	timestamp: timestamp
-}
 // 操作初始化
 letvCloud.init("fcba45089f", "768cabd0d7806dcd4da13586029be607");
 
@@ -152,8 +143,8 @@ function videoList(index, size) {
 	// 获取视频列表
 	var videoList = {
 		api: "video.list",
-		index: "1",
-		size: "10",
+		index: index,
+		size: size,
 		status: "0",
 		timestamp: ts
 	};
@@ -164,8 +155,8 @@ function videoList(index, size) {
 		document.getElementById('content').innerHTML = html;
 		$(".js-del-video").on("click", function (e) {
 			console.log(e);
-			console.log(this.dataset.videoid);
-			videoDet(this.dataset.videoid);
+			console.log(this.getAttribute("data-videoid"));
+			videoDet(this.getAttribute("data-videoid"));
 		});
 	})
 }
@@ -184,7 +175,7 @@ function videoDet(videoId) {
 		letvCloud.getResult(video, function (rs) {
 			if (rs.code === 0) {
 				console.log("视频删除成功");
-				videoList();
+				videoList(1, 20);
 			} else {
 				console.log("视频删除错误");
 			}
@@ -193,5 +184,89 @@ function videoDet(videoId) {
 	}
 }
 // 显示视频列表
-videoList(1, 10);
+videoList(1, 20);
 
+// 断点续传
+
+$("#upDataOfBreak").on("click", function () {
+	var myform = new FormData();
+	var input = document.getElementById("fileinput");
+	var file = input.files[0];
+	myform.append("video_file", file);
+	var videoinit = {
+		api: "video.upload.init",
+		video_name: file.name,
+		file_size: file.size,
+		uploadtype: "1",
+		timestamp: file.lastModified,
+		client_ip: "116.226.37.91"
+	}
+	letvCloud.getResult(videoinit,function(e){
+		console.log(e);
+		if(e.code === 0){
+			console.log("视频上传初始化成功");
+			var uploadUrl = e.data.upload_url;
+		}else{
+			console.log("视频上传初始化失败");
+			return;
+		}
+	})
+})
+
+// 普通上传视频
+$("#upData").on("click", function () {
+	var myform = new FormData();
+	console.log(myform);
+	var input = document.getElementById("fileinput")
+	var file = input.files[0];
+	myform.append('video_file', file);
+	// myform.append("video_file",file);
+	console.log(myform);
+	console.log(file);
+	var videoinit = {
+		api: "video.upload.init",
+		video_name: file.name,
+		file_size: file.size,
+		uploadtype: "0",
+		timestamp: file.lastModified,
+		client_ip: "116.226.37.91"
+	}
+	letvCloud.getResult(videoinit, function (e) {
+		// console.log(e);
+		if (e.code === 0) {
+			console.log("视频上传初始化成功");
+			var uploadUrl = e.data.upload_url;
+			console.log(uploadUrl);
+			// var videoId = e.data.video_id;
+			// myform.append("video_file","");
+			// myform.append("video_id",videoId);
+			// myform.append("video_file",file)
+			console.log(myform);
+			$.ajax({
+				url: uploadUrl,
+				type: "post",
+				data: myform,
+				processData: false,
+				contentType: false,
+				success: function (e) {
+					console.log(e);
+					setTimeout(function () {
+						videoList(1, 20);
+					}, 2000);
+				},
+				error: function (xml, b, c) {
+					console.log(xml);
+					console.log(b);
+					console.log(c);
+				},
+				complete:function(e){
+					console.log(e);
+					console.log("视频上传结束");
+				}
+			})
+		} else {
+			console.log("视频上传初始化失败");
+			return;
+		}
+	})
+})

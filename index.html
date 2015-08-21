@@ -13,6 +13,17 @@
 	<div class="container">
 		<div class="row">
 			<h1>乐视云</h1>
+			<div class="row col-md-12">
+				<form enctype="multipart/form-data" method="post" name="myfrom">
+					<div class="form-group">
+						<label for="fileinput">选择视频文件</label>
+						<input type="file" id="fileinput" name="video_file">
+						<p class="help-block">选择您需要上传的视频文件</p>
+					</div>
+				</form>
+				<button class="btn btn-default" id="upData">普通上传</button>
+				<button class="btn btn-default" id="upDataOfBreak">断点续传</button>
+			</div>
 			<div class="col-md-12">
 				<table class="table table-bordered table-hover" style="font-size:8px">
 					<thead>
@@ -72,18 +83,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row col-md-6">
-			<form action="">
-				<div class="form-group">
-					<label for="fileinput">选择视频文件</label>
-					<input type="file" id="fileinput">
-					<p class="help-block">选择您需要上传的视频文件</p>
-				</div>
-				<button class="btn btn-default" type="submit">提交</button>
-			</form>
-		</div>
-	</div>
+
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="bower_components/blueimp-md5/js/md5.min.js"></script>
