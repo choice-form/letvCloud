@@ -187,12 +187,11 @@ function videoDet(videoId) {
 videoList(1, 20);
 
 // 断点续传
-
 $("#upDataOfBreak").on("click", function () {
-	var myform = new FormData();
+	// var myform = new FormData();
 	var input = document.getElementById("fileinput");
 	var file = input.files[0];
-	myform.append("video_file", file);
+	// myform.append("video_file", file);
 	var videoinit = {
 		api: "video.upload.init",
 		video_name: file.name,
@@ -201,20 +200,109 @@ $("#upDataOfBreak").on("click", function () {
 		timestamp: file.lastModified,
 		client_ip: "116.226.37.91"
 	}
-	letvCloud.getResult(videoinit,function(e){
-		console.log(e);
-		if(e.code === 0){
-			console.log("视频上传初始化成功");
-			var uploadUrl = e.data.upload_url;
-		}else{
-			console.log("视频上传初始化失败");
-			return;
+	// 判断文件是否上传过,上传过则续传
+	if (localStorage.getItem("videoName") === videoinit.video_name) {
+		var uploadUrl = localStorage.getItem("uploadUrl");
+		var progressUrl = localStorage.getItem("progressUrl");
+		var token = localStorage.getItem("token");
+		var videoUploadResume = {
+			api: "video.upload.resume",
+			token: token,
+			uploadtype: "1",
+			timestamp: file.lastModified
 		}
-	})
+		letvCloud.getResult(videoUploadResume, function (e) {
+			console.log("已上传的文件大小："+e.data.upload_size);
+			file.slice(e.data.upload_size + 1, file.size);
+			var myform = new FormData();
+			myform.append("video_file", file);
+			var xhr = new XMLHttpRequest();
+			xhr.open("post", uploadUrl);
+			xhr.onload = function () {
+				if (xhr.status === 200) {
+					console.log("上传成功......");
+					localStorage.removeItem("token");
+					localStorage.removeItem("uploadUrl");
+					localStorage.removeItem("videoName");
+				} else {
+					console.log("出错了");
+				}
+			};
+			xhr.upload.onprogress = function (event) {
+				if (event.lengthComputable) {
+					var complete = (event.loaded / event.total * 100 | 0);
+					console.log(complete);
+					// $(".progress-bar").css("width", complete + "%");
+					// $(".progress-bar").html(complete + "%");
+					// progress.value = propress
+				}
+			}
+			xhr.send(myform);
+		})
+	} else {
+		//未上传过则重新上传
+		letvCloud.getResult(videoinit, function (e) {
+			var videoUploadResume = {
+				api: "video.upload.resume",
+				token: e.data.token,
+				uploadtype: "1",
+				timestamp: file.lastModified
+			}
+			localStorage.setItem("token", e.data.token);
+			localStorage.setItem("videoName", videoinit.video_name);
+			letvCloud.getResult(videoUploadResume, function (e) {
+				var uploadUrl = e.data.upload_url;
+				localStorage.setItem("uploadUrl", uploadUrl);
+				file.slice(0, file.size / 2);
+				var myform = new FormData();
+				myform.append("video_file", file);
+				var xhr = new XMLHttpRequest();
+				xhr.open("post", uploadUrl);
+				xhr.onload = function () {
+					if (xhr.status === 200) {
+						console.log("上传成功......");
+					} else {
+						console.log("出错了");
+					}
+				};
+				xhr.upload.onprogress = function (event) {
+					if (event.lengthComputable) {
+						var complete = (event.loaded / event.total * 100 | 0);
+						console.log(complete);
+						// $(".progress-bar").css("width", complete + "%");
+						// $(".progress-bar").html(complete + "%");
+						// progress.value = propress
+					}
+				}
+				xhr.send(myform);
+			})
+		})
+	}
 })
+
+function updata(file, url, callback) {
+	var myform = new FormData();
+	myform.append("video_file", file);
+	var uploadUrl = url;
+	var xhr = new XMLHttpRequest();
+	xhr.open("post", uploadUrl);
+	xhr.onload = function () {
+		if (xhr.status === 200) {
+			console.log("上传成功......");
+			callback();
+		} else {
+			console.log("出错了");
+		}
+	};
+	xhr.send(myform);
+}
 
 // 普通上传视频
 $("#upData").on("click", function () {
+	
+	// $(".progress-bar").css("width", "0%");
+	// $(".progress-bar").html("0%");
+	
 	var myform = new FormData();
 	console.log(myform);
 	var input = document.getElementById("fileinput")
@@ -237,36 +325,33 @@ $("#upData").on("click", function () {
 			console.log("视频上传初始化成功");
 			var uploadUrl = e.data.upload_url;
 			console.log(uploadUrl);
-			// var videoId = e.data.video_id;
-			// myform.append("video_file","");
-			// myform.append("video_id",videoId);
-			// myform.append("video_file",file)
-			console.log(myform);
-			$.ajax({
-				url: uploadUrl,
-				type: "post",
-				data: myform,
-				processData: false,
-				contentType: false,
-				success: function (e) {
-					console.log(e);
+			// console.log(myform);
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", uploadUrl);
+			xhr.onload = function () {
+				if (xhr.status === 200) {
+					console.log("上传成功");
 					setTimeout(function () {
 						videoList(1, 20);
 					}, 2000);
-				},
-				error: function (xml, b, c) {
-					console.log(xml);
-					console.log(b);
-					console.log(c);
-				},
-				complete:function(e){
-					console.log(e);
-					console.log("视频上传结束");
+				} else {
+					console.log("出错了");
 				}
-			})
+			};
+			xhr.upload.onprogress = function (event) {
+				if (event.lengthComputable) {
+					var complete = (event.loaded / event.total * 100 | 0);
+					console.log(complete);
+					// $(".progress-bar").css("width", complete + "%");
+					// $(".progress-bar").html(complete + "%");
+					// progress.value = propress
+				}
+			}
+			xhr.send(myform);
 		} else {
 			console.log("视频上传初始化失败");
 			return;
 		}
 	})
 })
+
