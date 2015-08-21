@@ -14,7 +14,7 @@
 		<div class="row">
 			<h1>乐视云</h1>
 			<div class="col-md-12">
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover" style="font-size:8px">
 					<thead>
 						<tr>
 							<h3>视频列表</h3>
@@ -25,7 +25,7 @@
 							<th>video_name</th>
 							<th>add_time</th>
 							<th>complete_time</th>
-							<th>file_md5</th>
+							<!--<th>file_md5</th>-->
 							<th>img</th>
 							<th>initial_size</th>
 							<th>is_pay</th>
@@ -35,6 +35,8 @@
 							<!--<th>video_desc</th>-->
 							<th>video_duration</th>
 							<th>video_unique</th>
+							<th>更新</th>
+							<th>删除</th>
 						</tr>
 					</thead>
 					<tbody id="content">
@@ -46,7 +48,7 @@
 								<td>{{value.video_name}}</td>
 								<td>{{value.add_time}}</td>
 								<td>{{value.complete_time}}</td>
-								<td>{{value.file_md5}}</td>
+								<!--<td>{{value.file_md5}}</td>-->
 								<td>{{value.img}}</td>
 								<td>{{value.initial_size}}</td>
 								<td>{{value.is_pay}}</td>
@@ -56,6 +58,12 @@
 								<!--<td>{{value.video_desc}}</td>-->
 								<td>{{value.video_duration}}</td>
 								<td>{{value.video_unique}}</td>
+								<td>
+									<button class="btn btn-default btn-warning">更新</button>
+								</td>
+								<td>
+									<button class="btn btn-default btn-danger js-del-video" data-videoid="{{value.video_id}}">删除</button>
+								</td>
 							</tr>
 							{{/each}}
 						</script>

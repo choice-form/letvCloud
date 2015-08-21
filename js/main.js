@@ -26,11 +26,11 @@ var letvCloud = (function (letvCloud) {
 	* @return {undefine}
 	*/
 	letv.getResult = function (funParam, callback) {
-		if(letvObj.user_unique === ""){
+		if (letvObj.user_unique === "") {
 			console.log("请初始化user_unique参数");
 			return;
 		}
-		if(letvObj.secret_key ===""){
+		if (letvObj.secret_key === "") {
 			console.log("请初始化secret_key参数");
 			return;
 		}
@@ -119,49 +119,79 @@ var letvCloud = (function (letvCloud) {
 	return letv;
 })(window.letvCloud || {});
 
-var timestamp = (function(){
+var timestamp = (function () {
 	var ts = new Date().getTime();
 	return ts;
 })();
 
-// 获取视频列表
-var videoList = {
-	api: "video.list",
-	index: "1",
-	size: "10",
-	status: "0",
-	timestamp: timestamp
-};
+
 // 获取单个视频信息
 var videoGet = {
 	api: "video.get",
 	video_id: "15427025",
 	timestamp: timestamp
 }
-// 删除视频
-var videoDel = {
-	api: "video.del",
-	video_id: "15427025",
-	timestamp: timestamp
-}
+
 // 视频上传初始化
 var init = {
 	api: "video.upload.init",
 	video_name: "Daum Potplayer-64 Bits.mp4",
 	client_ip: "101.224.122.70",
 	file_size: "123123",
-	uploadtype:"0", //是否分片上传，0不分片，1分片；默认0
+	uploadtype: "0", //是否分片上传，0不分片，1分片；默认0
 	timestamp: timestamp
 }
-// 初始化
+// 操作初始化
 letvCloud.init("fcba45089f", "768cabd0d7806dcd4da13586029be607");
-// 在页面上生成视频列表
-letvCloud.getResult(videoList, function (rs) {
-	var list = rs.data;
-	console.log(list)
-	var html = template('test', { list: list });
-	document.getElementById('content').innerHTML = html;
-})
-letvCloud.getResult(init,function(rs){
 
-})
+/**
+ * 显示视频列表
+ */
+function videoList(index, size) {
+	var ts = new Date().getTime();
+	// 获取视频列表
+	var videoList = {
+		api: "video.list",
+		index: "1",
+		size: "10",
+		status: "0",
+		timestamp: ts
+	};
+	letvCloud.getResult(videoList, function (rs) {
+		var list = rs.data;
+		console.log(list)
+		var html = template('test', { list: list });
+		document.getElementById('content').innerHTML = html;
+		$(".js-del-video").on("click", function (e) {
+			console.log(e);
+			console.log(this.dataset.videoid);
+			videoDet(this.dataset.videoid);
+		});
+	})
+}
+
+/**
+ * 删除单个视频
+ */
+function videoDet(videoId) {
+	var ts = new Date().getTime();
+	var video = {
+		api: "video.del",
+		video_id: videoId,
+		timestamp: ts
+	}
+	if (confirm("是否删除视频？")) {
+		letvCloud.getResult(video, function (rs) {
+			if (rs.code === 0) {
+				console.log("视频删除成功");
+				videoList();
+			} else {
+				console.log("视频删除错误");
+			}
+			return;
+		})
+	}
+}
+// 显示视频列表
+videoList(1, 10);
+
