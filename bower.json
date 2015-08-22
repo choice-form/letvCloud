@@ -20,6 +20,8 @@
   "dependencies": {
     "blueimp-md5": "~1.1.1",
     "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "artTemplate": "git@github.com:aui/artTemplate.git#~3.0.1",
+    "requirejs": "~2.1.20"
   }
 }

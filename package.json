@@ -1,31 +1,21 @@
 {
-  "name": "letvcloud",
+  "name": "letv",
   "version": "0.0.1",
-  "description": "letvcloud-csvfx",
-  "directories": {
-    "doc": "doc"
+  "private": true,
+  "scripts": {
+    "install": "bower install && tsd install",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "art-template": "^3.0.3",
-    "http-server": "^0.8.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "postinstall": "bower install && tsd install",
-    "start": "http-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "yyonggithub",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/choice-form/letvCloud.git"
-  },
-  "keywords": [
-    "letvcloud"
-  ],
-  "bugs": {
-    "url": "https://github.com/choice-form/letvCloud/issues"
-  },
-  "homepage": "https://github.com/choice-form/letvCloud#readme"
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "less-middleware": "1.0.x",
+    "md5": "^2.0.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  }
 }

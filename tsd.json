@@ -10,6 +10,21 @@
     },
     "blueimp-md5/blueimp-md5.d.ts": {
       "commit": "38fb591c6eba840e0b53d1110302b8e4fb04651c"
+    },
+    "serve-static/serve-static.d.ts": {
+      "commit": "8f081073e6cb416f901b272810d8b04d6e01c9e0"
+    },
+    "mime/mime.d.ts": {
+      "commit": "8f081073e6cb416f901b272810d8b04d6e01c9e0"
+    },
+    "bootstrap/bootstrap.d.ts": {
+      "commit": "8f081073e6cb416f901b272810d8b04d6e01c9e0"
+    },
+    "express/express.d.ts": {
+      "commit": "8f081073e6cb416f901b272810d8b04d6e01c9e0"
+    },
+    "node/node.d.ts": {
+      "commit": "8f081073e6cb416f901b272810d8b04d6e01c9e0"
     }
   }
 }

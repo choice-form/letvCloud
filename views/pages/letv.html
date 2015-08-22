@@ -5,14 +5,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>letv</title>
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.min.css">
 </head>
 
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>乐视云</h1>
+			<h1>[[title]]</h1>
 			<div class="row col-md-12">
 				<form enctype="multipart/form-data" method="post" name="myfrom">
 					<div class="form-group">
@@ -37,7 +37,6 @@
 						</tr>
 						<tr>
 							<th>#</th>
-							<th>video_id</th>
 							<th>video_name</th>
 							<th>add_time</th>
 							<th>complete_time</th>
@@ -60,12 +59,11 @@
 							{{each list as value i}}
 							<tr>
 								<th scope="row">{{i+1}}</th>
-								<td>{{value.video_id}}</td>
 								<td>{{value.video_name}}</td>
 								<td>{{value.add_time}}</td>
 								<td>{{value.complete_time}}</td>
 								<!--<td>{{value.file_md5}}</td>-->
-								<td>{{value.img}}</td>
+								<td><img src="{{value.img}}" alt=""></td>
 								<td>{{value.initial_size}}</td>
 								<td>{{value.is_pay}}</td>
 								<td>{{value.mid}}</td>
@@ -89,11 +87,11 @@
 		</div>
 	</div>
 
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/blueimp-md5/js/md5.min.js"></script>
-	<script src="node_modules/art-template/dist/template.js"></script>
-	<script src="js/main.js"></script>
+	<script src="jquery/dist/jquery.min.js"></script>
+	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="blueimp-md5/js/md5.min.js"></script>
+	<script src="artTemplate/dist/template-debug.js"></script>
+	<script src="javascripts/main.js"></script>
 </body>
 
 </html>

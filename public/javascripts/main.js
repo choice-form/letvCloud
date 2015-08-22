@@ -300,8 +300,8 @@ function updata(file, url, callback) {
 // 普通上传视频
 $("#upData").on("click", function () {
 	
-	// $(".progress-bar").css("width", "0%");
-	// $(".progress-bar").html("0%");
+	$(".progress-bar").css("width", "0%");
+	$(".progress-bar").html("0%");
 	
 	var myform = new FormData();
 	console.log(myform);
@@ -342,8 +342,8 @@ $("#upData").on("click", function () {
 				if (event.lengthComputable) {
 					var complete = (event.loaded / event.total * 100 | 0);
 					console.log(complete);
-					// $(".progress-bar").css("width", complete + "%");
-					// $(".progress-bar").html(complete + "%");
+					$(".progress-bar").css("width", complete + "%");
+					$(".progress-bar").html(complete + "%");
 					// progress.value = propress
 				}
 			}
