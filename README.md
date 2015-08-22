@@ -1,5 +1,5 @@
 # letvCloud
-乐视云视频上传api(javascript 实现)
+乐视云视频管理
 
 ## 安装依赖
 npm install
