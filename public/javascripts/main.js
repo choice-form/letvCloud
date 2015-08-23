@@ -1,5 +1,5 @@
 $(function () {
-	var url = 'http://192.168.0.109:3000/letv';
+	var url = 'http://localhost:3000/letv';
 	/**
 	 * 生成视频列表
 	 * @param {Number} 索引页

@@ -1,10 +1,11 @@
 var express = require('express');
 var url = require('url');
 var letv = require('../letvCloud/letv');
+var config = require("../config.js");
 var router = express.Router();
 
 // 初始化
-letv.init("fcba45089f", "768cabd0d7806dcd4da13586029be607");
+letv.init(config.user_unique,config.secret_key,config.serverUrl);
 
 console.log(letv);
 /* GET home page. */

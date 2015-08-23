@@ -119,9 +119,10 @@ module.exports = function () {
 	/**
 	 * 初始化
 	 */
-	function init(uu, sk) {
+	function init(uu, sk, url) {
 		letvObj.user_unique = uu;
 		letvObj.secret_key = sk;
+		uploadIp = url;
 	};
 
 	/**
