@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="row">
 			<h1>[[title]]</h1>
-			<div class="row col-md-12">
+			<div class="col-md-12">
 				<form enctype="multipart/form-data" method="post" name="myfrom">
 					<div class="form-group">
 						<label for="fileinput">选择视频文件</label>
@@ -21,13 +21,14 @@
 						<p class="help-block">选择您需要上传的视频文件</p>
 					</div>
 				</form>
-				<div class="progress">
+				<div class="progress col-md-6">
 					<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
 						0%
 					</div>
 				</div>
-				<button class="btn btn-default" id="upData">普通上传</button>
-				<button class="btn btn-default" id="upDataOfBreak">断点续传</button>
+				<div class="col-md-12">
+					<button class="btn btn-default" id="upDataOfBreak">断点续传</button>
+				</div>
 			</div>
 			<div class="col-md-12">
 				<table class="table table-bordered table-hover" style="font-size:8px">
@@ -37,19 +38,19 @@
 						</tr>
 						<tr>
 							<th>#</th>
-							<th>video_name</th>
-							<th>add_time</th>
-							<th>complete_time</th>
+							<th>视频名称</th>
+							<!--<th>添加时间</th>-->
+							<th>上传时间</th>
 							<!--<th>file_md5</th>-->
-							<th>img</th>
-							<th>initial_size</th>
-							<th>is_pay</th>
-							<th>mid</th>
-							<th>status</th>
+							<th>视频截图</th>
+							<th>视频大小</th>
+							<th>是否收费</th>
+							<!--<th>mid</th>-->
+							<th>状态</th>
 							<!--<th>tag</th>-->
 							<!--<th>video_desc</th>-->
-							<th>video_duration</th>
-							<th>video_unique</th>
+							<th>播放时长</th>
+							<th>视频唯一标识码</th>
 							<th>更新</th>
 							<th>删除</th>
 						</tr>
@@ -57,26 +58,26 @@
 					<tbody id="content">
 						<script id="test" type="text/html">
 							{{each list as value i}}
-							<tr>
+							<tr data-videoid="{{value.video_id}}">
 								<th scope="row">{{i+1}}</th>
 								<td>{{value.video_name}}</td>
-								<td>{{value.add_time}}</td>
+								<!--<td>{{value.add_time}}</td>-->
 								<td>{{value.complete_time}}</td>
 								<!--<td>{{value.file_md5}}</td>-->
 								<td><img src="{{value.img}}" alt=""></td>
 								<td>{{value.initial_size}}</td>
 								<td>{{value.is_pay}}</td>
-								<td>{{value.mid}}</td>
+								<!--<td>{{value.mid}}</td>-->
 								<td>{{value.status}}</td>
 								<!--<td>{{value.tag}}</td>-->
 								<!--<td>{{value.video_desc}}</td>-->
 								<td>{{value.video_duration}}</td>
 								<td>{{value.video_unique}}</td>
 								<td>
-									<button class="btn btn-default btn-warning">更新</button>
+									<button class="btn btn-default btn-warning js-get-video">更新</button>
 								</td>
 								<td>
-									<button class="btn btn-default btn-danger js-del-video" data-videoid="{{value.video_id}}">删除</button>
+									<button class="btn btn-default btn-danger js-del-video">删除</button>
 								</td>
 							</tr>
 							{{/each}}
