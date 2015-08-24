@@ -1,6 +1,8 @@
 $(function () {
+
 	// 服务器地址
 	var url = 'http://192.168.0.50:3000/letv';
+
 	/**
 	 * 生成视频列表
 	 * @param {Number} 索引页

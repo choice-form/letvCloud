@@ -1,6 +1,7 @@
 var express = require('express');
 var url = require('url');
 var letv = require('../letvCloud/letv');
+var config = require("../config.js");
 var router = express.Router();
 
 console.log(letv);
