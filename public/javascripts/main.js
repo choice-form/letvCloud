@@ -1,5 +1,6 @@
 $(function () {
-	var url = 'http://192.168.0.109:3000/letv';
+	// 服务器地址
+	var url = 'http://192.168.0.50:3000/letv';
 	/**
 	 * 生成视频列表
 	 * @param {Number} 索引页
@@ -20,18 +21,58 @@ $(function () {
 				console.log(result.data);
 				var html = template('test', { list: result.data });
 				$('#content').html(html);
+				// 删除视频
 				$(".js-del-video").on("click", function (e) {
 					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
 					videoDel(nodeId);
 				});
+				// 获取单个视频信息
 				$(".js-get-video").on('click', function (e) {
 					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
-					videoGet(nodeId);
+					videoGet(nodeId, function (e) {
+
+					});
+				});
+				// 获取视频播放接口
+				$(".js-video-interface").on('click', function (e) {
+					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
+					videoGet(nodeId, function (e) {
+						var data = e.data;
+						videoGetPlayinterface(data.video_unique,'',"js");
+					});
 				})
 			}
 		})
 	}
-
+	/**
+	 * 获取视频播放接口
+	 * @param {string} vu 视频唯一识别码
+	 * @param {string} pu 播放器唯一标识码 默认需设置为空字符串
+	 * @param {string} type 接口类型：url,js,flash,html
+	 * @param {string} auto_play 是否自动播放：1表示自动播放；0表示不自动播放。默认值由双方事先约定
+	 * @param {Number} width 播放去宽度,默认设置了640
+	 * @param {Number} height 播放器高度，默认设置了480
+	 * @return {undefind}
+	 */
+	function videoGetPlayinterface(vu, pu, type, auto_play, width, height) {
+		var playObj = {
+			api:"play.interface",
+			vu: vu,
+			pu: pu,
+			type: type,
+			auto_play: auto_play,
+			width: width,
+			height: height
+		};
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: playObj,
+			success: function (rs) {
+				console.log(rs);
+			}
+		})
+	}
 	/**
 	 * 删除单个视频
 	 */
@@ -60,7 +101,7 @@ $(function () {
 	/**
 	 * 获取单个视频信息
 	 */
-	function videoGet(videoId) {
+	function videoGet(videoId, callback) {
 		var video = {
 			api: 'video.get',
 			video_id: videoId
@@ -72,6 +113,7 @@ $(function () {
 			success: function (rs) {
 				var result = JSON.parse(rs);
 				console.log(result);
+				callback(result);
 			}
 		})
 	}
@@ -87,7 +129,7 @@ $(function () {
 			video_name: file.name,
 			file_size: file.size,
 			uploadtype: '1',
-			client_ip: '192.168.0.19'
+			// client_ip: '192.168.0.19'
 		};
 		$.ajax({
 			url: url,
@@ -147,6 +189,10 @@ $(function () {
 				localStorage.removeItem("token");
 				// localStorage.removeItem("uploadUrl");
 				localStorage.removeItem("videoName");
+				// 刷新视频列表
+				setTimeout(function () {
+					videoList(1, 20);
+				}, 2000);
 			} else {
 				console.log("出错了");
 			}
