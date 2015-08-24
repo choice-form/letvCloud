@@ -13,9 +13,9 @@
 
 ## 配置
 1. 服务器端
-*修改`/config.js`文件进行服务器配置*
+* 修改`/config.js`文件进行服务器配置
 2. 客户端
- *修改`/public/javascripts/main.js`内url的值为服务器ip*
+* 修改`/public/javascripts/main.js`内url的值为服务器ip
 	
 ## 启动 
 `npm start`
