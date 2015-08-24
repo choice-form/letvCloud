@@ -1,7 +1,7 @@
 $(function () {
 
 	// 服务器地址
-	var url = 'http://192.168.0.50:3000/letv';
+	var url = 'http://192.168.0.109:3000/letv';
 
 	/**
 	 * 生成视频列表
@@ -32,33 +32,41 @@ $(function () {
 				$(".js-get-video").on('click', function (e) {
 					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
 					videoGet(nodeId, function (e) {
-
 					});
 				});
 				// 获取视频播放接口
 				$(".js-video-interface").on('click', function (e) {
-					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
-					videoGet(nodeId, function (e) {
-						var data = e.data;
-						videoGetPlayinterface(data.video_unique,'',"js");
+					var vu = this.parentNode.parentNode.getAttribute('data-vu')
+					videoGetPlayinterface(vu, '', 'html', 0, 0, 0, function (rs) {
+						console.log(rs);
+					});
+				});
+				//播放视频
+				$(".js-video-play").on('click', function (e) {
+					var vu = this.parentNode.parentNode.getAttribute('data-vu')
+					videoGetPlayinterface(vu, '', 'html', 0, 550, 450, function (rs) {
+						$(".modal-body p").html(rs);
+						console.log(rs);
 					});
 				})
 			}
-		})
-	}
+		});
+	};
+
 	/**
 	 * 获取视频播放接口
 	 * @param {string} vu 视频唯一识别码
 	 * @param {string} pu 播放器唯一标识码 默认需设置为空字符串
 	 * @param {string} type 接口类型：url,js,flash,html
-	 * @param {string} auto_play 是否自动播放：1表示自动播放；0表示不自动播放。默认值由双方事先约定
+	 * @param {Number} auto_play 是否自动播放：1表示自动播放；0表示不自动播放。默认值由双方事先约定
 	 * @param {Number} width 播放去宽度,默认设置了640
 	 * @param {Number} height 播放器高度，默认设置了480
-	 * @return {undefind}
+	 * @param {Function} callback 回调函数
+	 * @return {undefined}
 	 */
-	function videoGetPlayinterface(vu, pu, type, auto_play, width, height) {
+	function videoGetPlayinterface(vu, pu, type, auto_play, width, height, callback) {
 		var playObj = {
-			api:"play.interface",
+			api: "play.interface",
 			vu: vu,
 			pu: pu,
 			type: type,
@@ -71,10 +79,12 @@ $(function () {
 			type: 'post',
 			data: playObj,
 			success: function (rs) {
-				console.log(rs);
+				// console.log(rs);
+				callback(rs);
 			}
 		})
 	}
+	
 	/**
 	 * 删除单个视频
 	 */
@@ -100,6 +110,7 @@ $(function () {
 			})
 		}
 	}
+	
 	/**
 	 * 获取单个视频信息
 	 */
@@ -122,7 +133,7 @@ $(function () {
 	
 	/**
 	 * 视频上传初始化(断点续传)
-	 * @param {obj} 视频对象
+	 * @param {obj} 视频文件
 	 * @param {Function} 回调函数
 	 */
 	function videoUploadInit(file, callback) {
@@ -150,11 +161,12 @@ $(function () {
 			}
 		})
 	}
+	
 	/**
 	 * 断点续传
-	 * @param {Object} 文件对象
-	 * @param {Object} videoUploadInit 返回的对象
-	 * @param {Function} 回调函数
+	 * @param {Object} file 视频文件对象
+	 * @param {Object} intRs ideoUploadInit 返回的对象
+	 * @param {Function} callback 回调函数
 	 */
 	function videoUploadResume(file, initRs, callback) {
 		var token = initRs.data.token;
@@ -176,8 +188,12 @@ $(function () {
 			}
 		})
 	}
+	
 	/**
 	 * 上传视频
+	 * @param {File} file 视频文件
+	 * @param {Number} uploadSize 视频文件尺寸
+	 * @param {String} uploadUrl 上传地址
 	 */
 	function videoUpdata(file, uploadSize, uploadUrl) {
 		var fl = file.slice(uploadSize)
@@ -209,8 +225,7 @@ $(function () {
 		}
 		xhr.send(myform);
 	}
-
-	videoList(1, 20);
+	
 	/**
 	 * 断点续传
 	 */
@@ -236,4 +251,6 @@ $(function () {
 			})
 		}
 	});
+
+	videoList(1, 20);
 })

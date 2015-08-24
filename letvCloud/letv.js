@@ -1,6 +1,6 @@
 var md5 = require('md5');
 var request = require("request");
-var formdata = require("form-data");
+// var formdata = require("form-data");
 var config = require("../config");
 var querystring = require('querystring');
 

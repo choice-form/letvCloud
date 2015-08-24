@@ -50,16 +50,17 @@
 							<!--<th>tag</th>-->
 							<!--<th>video_desc</th>-->
 							<th>播放时长</th>
-							<th>视频唯一标识码</th>
+							<!--<th>视频唯一标识码</th>-->
 							<th>更新</th>
 							<th>删除</th>
 							<th>代码</th>
+							<th>播放</th>
 						</tr>
 					</thead>
 					<tbody id="content">
 						<script id="test" type="text/html">
 							{{each list as value i}}
-							<tr data-videoid="{{value.video_id}}">
+							<tr data-videoid="{{value.video_id}}" data-vu="{{value.video_unique}}">
 								<th scope="row">{{i+1}}</th>
 								<td>{{value.video_name}}</td>
 								<!--<td>{{value.add_time}}</td>-->
@@ -73,7 +74,7 @@
 								<!--<td>{{value.tag}}</td>-->
 								<!--<td>{{value.video_desc}}</td>-->
 								<td>{{value.video_duration}}</td>
-								<td>{{value.video_unique}}</td>
+								<!--<td>{{value.video_unique}}</td>-->
 								<td>
 									<button class="btn btn-default btn-warning js-get-video">更新</button>
 								</td>
@@ -83,11 +84,34 @@
 								<td>
 									<button class="btn btn-default js-video-interface">代码</button>
 								</td>
+								<td>
+									<button class="btn btn-default btn-primary js-video-play" data-toggle="modal" data-target="#myModal">播放</button>
+								</td>
 							</tr>
 							{{/each}}
 						</script>
 					</tbody>
 				</table>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title">Modal title</h4>
+							</div>
+							<div class="modal-body">
+								<p>One fine body&hellip;</p>
+							</div>
+							<!--<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>-->
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+				<!-- /.modal -->
 			</div>
 		</div>
 	</div>
