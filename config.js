@@ -1,6 +1,6 @@
 var config = {
 	// 服务器所在ip
-	serverUrl: "116.226.35.96",
+	serverUrl: "116.226.36.63",
 	// 用户标识符
 	user_unique : "fcba45089f",
 	// 用户密钥

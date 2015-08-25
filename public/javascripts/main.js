@@ -1,14 +1,28 @@
-$(function () {
-
+var letv = (function () {
 	// 服务器地址
-	var url = 'http://192.168.0.109:3000/letv';
+	var url = 'http://192.168.0.50:3000/letv';
+	var fileTypes = ['wmv', 'avi', 'dat', 'asf', 'rm', 'rmvb', 'ram', 'mpg', 'mpeg', '3gp', 'mov', 'mp4', 'm4v', 'dvix', 'dv', 'dat', 'mkv', 'flv', 'f4v', 'vob', 'ram', 'qt', 'divx', 'cpk', 'fli', 'flc', 'mod'];
 
+	function isVideo(file) {
+		if (typeof (file) === "undefined") {
+			alert("请选择视频");
+			return false
+		}
+		var fileType = file.type.split("/")[1];
+		for (var i = 0; i < fileTypes.length; i++) {
+			if (fileType === fileTypes[i]) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * 生成视频列表
 	 * @param {Number} 索引页
 	 * @param {Number} 每页项数
 	 */
-	function videoList(index, size) {
+	function videoList(index, size, callback) {
 		var data = {
 			api: 'video.list',
 			index: index,
@@ -19,36 +33,7 @@ $(function () {
 			type: 'post',
 			data: data,
 			success: function (rs) {
-				var result = JSON.parse(rs);
-				console.log(result.data);
-				var html = template('test', { list: result.data });
-				$('#content').html(html);
-				// 删除视频
-				$(".js-del-video").on("click", function (e) {
-					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
-					videoDel(nodeId);
-				});
-				// 获取单个视频信息
-				$(".js-get-video").on('click', function (e) {
-					var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
-					videoGet(nodeId, function (e) {
-					});
-				});
-				// 获取视频播放接口
-				$(".js-video-interface").on('click', function (e) {
-					var vu = this.parentNode.parentNode.getAttribute('data-vu')
-					videoGetPlayinterface(vu, '', 'html', 0, 0, 0, function (rs) {
-						console.log(rs);
-					});
-				});
-				//播放视频
-				$(".js-video-play").on('click', function (e) {
-					var vu = this.parentNode.parentNode.getAttribute('data-vu')
-					videoGetPlayinterface(vu, '', 'html', 0, 550, 450, function (rs) {
-						$(".modal-body p").html(rs);
-						console.log(rs);
-					});
-				})
+				callback(rs);
 			}
 		});
 	};
@@ -88,7 +73,7 @@ $(function () {
 	/**
 	 * 删除单个视频
 	 */
-	function videoDel(videoId) {
+	function videoDel(videoId, callback) {
 		var video = {
 			api: "video.del",
 			video_id: videoId
@@ -101,6 +86,9 @@ $(function () {
 				success: function (rs) {
 					var result = JSON.parse(rs);
 					if (result.code === 0) {
+						if (arguments.length > 1) {
+							callback(rs)
+						}
 						console.log('视频删除成功');
 					} else {
 						console.log('视频删除失败');
@@ -195,7 +183,7 @@ $(function () {
 	 * @param {Number} uploadSize 视频文件尺寸
 	 * @param {String} uploadUrl 上传地址
 	 */
-	function videoUpdata(file, uploadSize, uploadUrl) {
+	function videoUpdata(file, uploadSize, uploadUrl, callback) {
 		var fl = file.slice(uploadSize)
 		var myform = new FormData();
 		myform.append("video_file", fl);
@@ -204,13 +192,12 @@ $(function () {
 		xhr.onload = function () {
 			if (xhr.status === 200) {
 				console.log("上传成功......");
+				// alert("上传完成")
 				localStorage.removeItem("token");
-				// localStorage.removeItem("uploadUrl");
 				localStorage.removeItem("videoName");
-				// 刷新视频列表
-				setTimeout(function () {
-					videoList(1, 20);
-				}, 2000);
+				if (arguments.length > 3) {
+					callback();
+				}
 			} else {
 				console.log("出错了");
 			}
@@ -222,35 +209,92 @@ $(function () {
 				$(".progress-bar").css("width", complete + "%");
 				$(".progress-bar").html(complete + "%");
 			}
+		};
+		xhr.upload.onloadend = function(event){
+			console.log (event);
 		}
 		xhr.send(myform);
 	}
-	
-	/**
-	 * 断点续传
-	 */
+
+	return {
+		videoList: videoList,
+		videoGetPlayinterface: videoGetPlayinterface,
+		videoDel: videoDel,
+		videoGet: videoGet,
+		videoUploadInit: videoUploadInit,
+		videoUploadResume: videoUploadResume,
+		videoUpdata: videoUpdata,
+		url: url,
+		isVideo: isVideo
+	}
+})();
+
+
+$(function () {
+	// 上传
 	$('#upDataOfBreak').on('click', function () {
 		var input = document.getElementById('fileinput');
 		var file = input.files[0];
+		if (!letv.isVideo(file)) {
+			alert("上传的文件不是视频文件，请重新选择");
+			return;
+		}
 		if (localStorage.getItem("videoName") === file.name) {
 			var token = localStorage.getItem('token');
 			var obj = {
 				data: { token: token },
 			}
-			videoUploadResume(file, obj, function (e) {
+			letv.videoUploadResume(file, obj, function (e) {
 				console.log("视频将从:" + e.data.upload_size);
 				var uploadSize = e.data.upload_size;
-				videoUpdata(file, uploadSize + 1, e.data.upload_url);
+				letv.videoUpdata(file, uploadSize + 1, e.data.upload_url, function () {
+					alert("上传完成")
+				});
 			})
 		} else {
-			videoUploadInit(file, function (rs) {
-				videoUploadResume(file, rs, function (e) {
+			letv.videoUploadInit(file, function (rs) {
+				letv.videoUploadResume(file, rs, function (e) {
 					var uploadSize = 0;
-					videoUpdata(file, uploadSize, e.data.upload_url);
+					letv.videoUpdata(file, uploadSize, e.data.upload_url,function () {
+						alert("上传完成")
+					});
 				})
 			})
 		}
 	});
-
-	videoList(1, 20);
+	// 显示列表
+	letv.videoList(1, 20, function (rs) {
+		var result = JSON.parse(rs);
+		console.log(result.data);
+		var html = template('test', { list: result.data });
+		$('#content').html(html);
+		// 删除视频
+		$(".js-del-video").on("click", function (e) {
+			var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
+			letv.videoDel(nodeId, function (rs) {
+				this.parentNode.parentNode.remove();
+			});
+		});
+		// 获取单个视频信息
+		$(".js-get-video").on('click', function (e) {
+			var nodeId = this.parentNode.parentNode.getAttribute('data-videoid')
+			letv.videoGet(nodeId, function (e) {
+			});
+		});
+		// 获取视频播放接口
+		$(".js-video-interface").on('click', function (e) {
+			var vu = this.parentNode.parentNode.getAttribute('data-vu')
+			letv.videoGetPlayinterface(vu, '', 'html', 0, 0, 0, function (rs) {
+				console.log(rs);
+			});
+		});
+		//播放视频
+		$(".js-video-play").on('click', function (e) {
+			var vu = this.parentNode.parentNode.getAttribute('data-vu')
+			letv.videoGetPlayinterface(vu, '', 'html', 0, 550, 450, function (rs) {
+				$(".modal-body p").html(rs);
+				console.log(rs);
+			});
+		});
+	});
 })
