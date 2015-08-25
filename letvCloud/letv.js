@@ -107,7 +107,7 @@ module.exports = function () {
 		reqUrl += url + "?";
 		for (var key in funParam) {
 			if (funParam.hasOwnProperty(key)) {
-				var element = funParam[key];
+				var element = encodeURI(funParam[key]);
 				reqUrl += key + "=" + element + "&";
 			}
 		}
@@ -118,7 +118,7 @@ module.exports = function () {
 			}
 		}
 		// console.log(reqUrl);
-		var qUrl = encodeURI(reqUrl.slice(0, reqUrl.length - 1));
+		var qUrl = reqUrl.slice(0, reqUrl.length - 1);
 		console.log("[生成的请求链接]: " + qUrl);
 		return qUrl;
 	}
@@ -169,7 +169,7 @@ module.exports = function () {
 			video_name: video_name,
 			file_size: file_size,
 			uploadtype: 1,
-			timestamp: ts,
+			timestamp: "1369300735578",
 			client_ip: uploadIp
 		}
 
@@ -186,7 +186,7 @@ module.exports = function () {
 		var videoUploadResume = {
 			api: "video.upload.resume",
 			token: token,
-			timestamp: ts
+			timestamp: "1369300735578"
 		}
 		getResult(videoUploadResume, function (rs) {
 			callback(rs);
@@ -204,7 +204,7 @@ module.exports = function () {
 			index: index,
 			size: size,
 			status: '0',
-			timestamp: ts
+			timestamp: "1369300735578"
 		};
 		getResult(vl, function (rs) {
 			callback(rs);
@@ -219,7 +219,7 @@ module.exports = function () {
 		var video = {
 			api: "video.del",
 			video_id: videoId,
-			timestamp: ts
+			timestamp: "1369300735578"
 		}
 		getResult(video, function (rs) {
 			callback(rs);
@@ -234,7 +234,7 @@ module.exports = function () {
 		var video = {
 			api: 'video.get',
 			video_id: videoId,
-			timestamp: ts
+			timestamp: "1369300735578"
 		};
 		getResult(video, function (rs) {
 			callback(rs);
