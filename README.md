@@ -20,7 +20,7 @@
 ## 启动 
 `npm start`
 * 默认端口3000
-* 例如(乐视云管理页面)：[letvCloud-csvfx](http://localhost/3000/letv/)
+* 例如(乐视云管理页面)：`http://localhost/3000/letv/`
 	
 ### 使用
 
