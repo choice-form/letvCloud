@@ -23,14 +23,14 @@ module.exports = function () {
 	* @return {undefined}
 	*/
 	function getResult(funParam, callback) {
-		if (letvObj.user_unique === "") {
-			console.log("请配置user_unique参数");
-			return;
-		}
-		if (letvObj.secret_key === "") {
-			console.log("请配置secret_key参数");
-			return;
-		}
+		// if (letvObj.user_unique === "") {
+		// 	console.log("请配置user_unique参数");
+		// 	return;
+		// }
+		// if (letvObj.secret_key === "") {
+		// 	console.log("请配置secret_key参数");
+		// 	return;
+		// }
 		var req = getReqParam(funParam);
 		var hash = generateSign(req);
 		letvObj.sign = hash;
@@ -68,7 +68,7 @@ module.exports = function () {
 			res += element;
 		}, this);
 		res += letvObj.secret_key;
-		// console.log(res);
+		console.log("[sign生成MD5之前： ]"+ res);
 		hash = md5(res);
 		console.log("[sign: ]" + hash);
 		return hash;
@@ -163,7 +163,7 @@ module.exports = function () {
 	function videoUploadInit(obj, callback) {
 		var video_name = obj.video_name;
 		var file_size = obj.file_size;
-		var ts = new Date().getTime();
+		// var ts = new Date().getTime();
 		var videoinit = {
 			api: "video.upload.init",
 			video_name: video_name,

@@ -1,6 +1,7 @@
 var letv = (function () {
 	// 服务器地址
-	var url = 'http://192.168.0.50:3000/letv';
+	// var url = 'http://192.168.0.50:3000/letv';
+	var url = "http://localhost:52045/letv/todu";
 	var fileTypes = ['wmv', 'avi', 'dat', 'asf', 'rm', 'rmvb', 'ram', 'mpg', 'mpeg', '3gp', 'mov', 'mp4', 'm4v', 'dvix', 'dv', 'dat', 'mkv', 'flv', 'f4v', 'vob', 'ram', 'qt', 'divx', 'cpk', 'fli', 'flc', 'mod'];
 
 	function isVideo(file) {
