@@ -36,4 +36,8 @@ router.post('/letv', function (req, res, next) {
     }
   })
 })
+
+router.get('/play',function(req,res){
+  res.render("playletv",{title:"playletv"});
+})
 module.exports = router;

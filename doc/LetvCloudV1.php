@@ -14,7 +14,7 @@ if (!function_exists('curl_init'))
 {
 	throw new Exception('OpenAPI needs the cURL PHP extension.');
 }
-	
+
 /**
  * 如果您的 PHP 不支持JSON，请升级到 PHP 5.2.x 以上版本
  */

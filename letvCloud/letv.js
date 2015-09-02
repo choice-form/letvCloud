@@ -1,4 +1,5 @@
-var md5 = require('md5');
+// var md5 = require('md5');
+var crypto = require('crypto');
 var request = require("request");
 // var formdata = require("form-data");
 var config = require("../config");
@@ -55,7 +56,7 @@ module.exports = function () {
 		var arr = [];
 		var str = '';
 		var res = "";
-		var hash = "";
+		var hash;
 		for (var key in param) {
 			if (param.hasOwnProperty(key)) {
 				var element = param[key];
@@ -69,7 +70,10 @@ module.exports = function () {
 		}, this);
 		res += letvObj.secret_key;
 		console.log("[sign生成MD5之前： ]"+ res);
-		hash = md5(res);
+		var md5 = crypto.createHash('md5');
+		md5.update(res);
+		hash = md5.digest('hex');
+		// hash = md5(res);
 		console.log("[sign: ]" + hash);
 		return hash;
 	}

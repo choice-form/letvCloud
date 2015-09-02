@@ -1,0 +1,59 @@
+{
+	"checkstatus": "10000",
+	"firstlook": "0",
+	"playstatus": {
+		"status": "1"
+	},
+	"playurl": {
+		"cid": "11",
+		"pid": "10010051",
+		"vid": "23325457",
+		"title": "\u300a\u8499\u9762\u6b4c\u738b\u300b\u0032\u0030\u0031\u0035\u0030\u0038\u0032\u0033\uff1a\u5c0f\u9c9c\u8089\u9648\u5b66\u51ac\u7a7a\u964d\u731c\u8bc4\u56e2\u0020\u5f90\u5ce5\u573a\u5916\u56e7\u8bc4\u559c\u611f\u5341\u8db3",
+		"duration": "5291",
+		"pic": "http://i1.letvimg.com/lc01_isvrs/201508/16/23/56/f03c2346-9be3-4c93-bda6-8216554df992.jpg",
+		"download": [
+			"290005",
+			"290003",
+			"290001",
+			"290002"
+		],
+		"total": "7",
+		"nextvid": "23271337",
+		"domain": [
+			"http://g3.letv.cn",
+			"http://g3.letv.com",
+			"http://117.121.54.219"
+		],
+		"dispatch": {
+			"": [
+				"/vod/v2/MTc2LzIzLzI5L2xldHYtdXRzLzE5L3Zlcl8wMF8yMi0zMjUxNzA1NjQtYXZjLTQ3NjM0My1hYWMtMzIwNzctMzQ4MDEtMjI1Nzk1Ni1lZjdjMDNlZWI4ZTQzZTNjMGY2NTNhNzk1OTkwY2Y4OC0xNDM5ODkxOTc2MTEyLm1wNA==?b=519&mmsid=34088653&tm=1441166994&key=7043a4a0a3f5c55384f71cc37edff419&platid=3&splatid=301&playid=0&tss=ios&vtype=126&cvid=367743297032&payff=0&pip=21b84aff27d059d4164c0501c31498de",
+				"176/23/29/letv-uts/19/ver_00_22-325170564-avc-476343-aac-32077-34801-2257956-ef7c03eeb8e43e3c0f653a795990cf88-1439891976112.mp4"
+			],
+			"1000": [
+				"/vod/v2/MTY1LzM4LzU0L2xldHYtdXRzLzE5L3Zlcl8wMF8yMi0zMjUzNTk5NjUtYXZjLTQ3OTg0OC1hYWMtMzIwMDEtNTI5MTgwMC0zNDQ1Mjg2NjktZGNlZmI5NWJmMWU5N2RhMTE1YzllMTA2YTUwZmYzYmItMTQ0MDM1ODg3NTE1NC5tcDQ=?b=520&mmsid=34088653&tm=1441166994&key=9fa566c540d1bc343a91e3f296162961&platid=3&splatid=301&playid=0&tss=ios&vtype=13&cvid=367743297032&payff=0&pip=21b84aff27d059d4164c0501c31498de",
+				"165/38/54/letv-uts/19/ver_00_22-325359965-avc-479848-aac-32001-5291800-344528669-dcefb95bf1e97da115c9e106a50ff3bb-1440358875154.mp4"
+			],
+			"1300": [
+				"/vod/v2/MTY4LzE2LzI0L2xldHYtdXRzLzE5L3Zlcl8wMF8yMi0zMjUzNTk5NjYtYXZjLTg3OTY5Ny1hYWMtNjQwMDEtNTI5MTgwMC02MzAxOTgxNjctMWJhNDExNmVmMmFmNTU3NTk3YzNhMzdkMDhmZTBlZGItMTQ0MDM2MzQyMzc5Ny5tcDQ=?b=952&mmsid=34088653&tm=1441166994&key=c767d600ecfd540b14a4db86b260b145&platid=3&splatid=301&playid=0&tss=ios&vtype=22&cvid=367743297032&payff=0&pip=21b84aff27d059d4164c0501c31498de",
+				"168/16/24/letv-uts/19/ver_00_22-325359966-avc-879697-aac-64001-5291800-630198167-1ba4116ef2af557597c3a37d08fe0edb-1440363423797.mp4"
+			],
+			"350": [
+				"/vod/v2/MTU0LzQ3LzI3L2xldHYtdXRzLzE5L3Zlcl8wMF8yMi0zMjUzNTk5NjQtYXZjLTIyOTg5MC1hYWMtMzIwMDEtNTI5MTgwMC0xNzkxODE0OTYtOTdlYmExZmQyMWQ2YjZlNDIyNmE4YTAxMTE4MjE1YjgtMTQ0MDM1OTUxMTAzMi5tcDQ=?b=270&mmsid=34088653&tm=1441166994&key=125bd65446e1e127f26e130092f05831&platid=3&splatid=301&playid=0&tss=ios&vtype=21&cvid=367743297032&payff=0&pip=21b84aff27d059d4164c0501c31498de",
+				"154/47/27/letv-uts/19/ver_00_22-325359964-avc-229890-aac-32001-5291800-179181496-97eba1fd21d6b6e4226a8a01118215b8-1440359511032.mp4"
+			],
+			"mp4": [
+				"/vod/v2/MTYwLzI4LzgvbGV0di11dHMvMTkvdmVyXzAwXzIyLTMyNTM1OTk2My1hdmMtMTI5OTA2LWFhYy0zMjAwMS01MjkxODAwLTExMjkxNzYzMy0wYzVmZmQyMzg5YmFjMjFlZTA0N2VlZmZkNDU5NjU0Ny0xNDQwMzU5MzMzMzY3Lm1wNA==?b=170&mmsid=34088653&tm=1441166994&key=9edf5835fc5558931586f713069e001d&platid=3&splatid=301&playid=0&tss=ios&vtype=9&cvid=367743297032&payff=0&pip=21b84aff27d059d4164c0501c31498de",
+				"160/28/8/letv-uts/19/ver_00_22-325359963-avc-129906-aac-32001-5291800-112917633-0c5ffd2389bac21ee047eeffd4596547-1440359333367.mp4"
+			]
+		},
+		"imgprefix": "http://i0.letvimg.com/lc02_yunzhuanma/201508/24/03/51/fc5bdb77187ecdb3f05ef1ed65bef27e_34088653"
+	},
+	"statuscode": "1001",
+	"trylook": "0"
+}
+
+
+
+
+/vod/v2/MTc2LzIzLzI5L2xldHYtdXRzLzE5L3Zlcl8wMF8yMi0zMjUxNzA1NjQtYXZjLTQ3NjM0My1hYWMtMzIwNzctMzQ4MDEtMjI1Nzk1Ni1lZjdjMDNlZWI4ZTQzZTNjMGY2NTNhNzk1OTkwY2Y4OC0xNDM5ODkxOTc2MTEyLm1wNA==?b=519&mmsid=34088653&tm=1441166994&key=7043a4a0a3f5c55384f71cc37edff419&platid=3&splatid=301&playid=0&tss=ios&vtype=126&cvid=367743297032&payff=0&pip=21b84aff27d059d4164c0501c31498de",
+				"176/23/29/letv-uts/19/ver_00_22-325170564-avc-476343-aac-32077-34801-2257956-ef7c03eeb8e43e3c0f653a795990cf88-1439891976112.mp4
