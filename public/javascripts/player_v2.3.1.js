@@ -2474,7 +2474,9 @@ function initAdModule(d, h, f) {
                     });
                     if (b.callback)
                         window[b.callback](null );
-                    GUELib.Video.setup(b.parentId, [], b.w, b.h);
+                    // GUELib.Video.setup(b.parentId, [], b.w, b.h);
+                    // 此处的playObj.videoElId为视频虽在元素id
+                    GUELib.Video.setup(playObj.videoElId, [], b.w, b.h);
                     return p("\u64ad\u653e\u5931\u8d25\u4e86\uff0c\u4e0d\u5982\u5237\u65b0\u4e00\u4e0b\u8bd5\u8bd5", 
                     g.code)
                 }
@@ -2564,7 +2566,10 @@ function initAdModule(d, h, f) {
         }[d.rate];
         q && c.media[q] ? h = q : (d.rate = g[e],
         h = e);
-        var r, s, t = GUELib.Video.setup(d.parentId, 
+        // var r, s, t = GUELib.Video.setup(d.parentId, 
+        // [], d.w, d.h, {}, d.rate);
+        // 此处的playObj.videoElId为视频虽在元素id
+        var r, s, t = GUELib.Video.setup(playObj.videoElId, 
         [], d.w, d.h, {}, d.rate);
         null  != t.video && (d.hasOwnProperty("letvad") && "0" == d.letvad ? f() : (s = bcloudnH5PlayerPubsubz.subscribe(EventType.startPlayTrueMovie, f),
         initAdModule(t.video, d, a)))
@@ -2577,7 +2582,7 @@ function initAdModule(d, h, f) {
     function r(b) {
         var d = b.w ? b.w + "px" : "100%"
           , a = b.h ? b.h + "px" : "100%";
-        b.vu ? s = document.getElementById(b.parentId) : (document.write('<div id="crtErrorArea" style="width:' + d + ";height:" + a + 
+        b.vu ? s = document.getElementById(b.parentId) : (document.getElementById(playObj.superElId).innerHTML=('<div id="crtErrorArea" style="width:' + d + ";height:" + a + 
         ';margin-right:auto;margin-left:auto;position:relative"></div>'),
         s = document.getElementById("crtErrorArea"));
         s.innerHTML = '<div id="showError" style="width:' + d + ";height:" + a + ';margin-right:auto;margin-left:auto;position:absolute;z-index:1"></div>';
@@ -2649,7 +2654,7 @@ function initAdModule(d, h, f) {
         if ((b = option) && !b.vu)
             r(b),
             p("SDK\u5bf9\u63a5\u53c2\u6570\u4e0d\u6b63\u786e", 1);
-        else if (document.write('<div id="' + b.parentId + '" style="width:' + (b.w ? b.w + "px" : "100%") + ";height:" + (b.h ? b.h + "px" : "100%") + ';margin-right:auto;margin-left:auto;position:relative"></div>'),
+        else if (document.getElementById(playObj.superElId).innerHTML=('<div id="' + b.parentId + '" style="width:' + (b.w ? b.w + "px" : "100%") + ";height:" + (b.h ? b.h + "px" : "100%") + ';margin-right:auto;margin-left:auto;position:relative"></div>'),
         r(b),
         b.vu) {
             void 0 == window.ReviveSWF && 

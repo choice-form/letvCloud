@@ -290,6 +290,10 @@ module.exports = function () {
 		if (type === "html") {
 			res = '<embed src="http://yuntv.letv.com/bcloud.swf" allowFullScreen="true" quality="high" width="800" height="450" align="middle" allowScriptAccess="always" flashvars="' + qs + '" type="application/x-shockwave-flash"></embed>';
 		}
+		//新增json格式，用来直接生成 letvcloud_player_conf 的值
+		if (type === "json"){
+						res = jsonString;
+		}
 		callback(res);
 	}
 	return {

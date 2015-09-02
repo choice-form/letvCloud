@@ -10,8 +10,10 @@
       , g = h.navigator
       , k = g.userAgent.toLowerCase()
       , i = g.platform.toLowerCase()
-      , m = i ? /win/.test(i) : /win/.test(k)
-      , n = i ? /mac/.test(i) : /mac/.test(k)
+      // , m = i ? /win/.test(i) : /win/.test(k)
+      // , n = i ? /mac/.test(i) : /mac/.test(k)
+      , m = false
+      , n = false
       , o = !+"\v1";
     h.ReviveSWF = function() {
         var f = {
