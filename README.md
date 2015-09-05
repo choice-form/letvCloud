@@ -1,4 +1,4 @@
-# letvCloud
+# letvCloud-nodejs
 乐视云视频管理
 
 ## 开发环境
@@ -38,6 +38,3 @@
 * 播放视频：`http://localhost:3000/play`
 * 修改了乐视云原始js代码，改成可供调用的方法来适应项目需求
 * 在原有乐视云公开api基础上增加了直接生成`letvcloud_player_conf`的方法，调用方法是 type 类型内添加 ``json`` 类型
-
-***
-未完待续...
